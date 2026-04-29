@@ -10,6 +10,9 @@ namespace Rasyonet_HW.API.External
         private readonly string _apiKey;
         private readonly string _baseUrl;
 
+        // Options Pattern kullanımı — FinnhubOptions IOptions<T> aracılığıyla
+        // inject ediliyor. API key ve base URL appsettings'ten güvenli şekilde okunur.
+
         public FinnhubService(HttpClient httpClient, IOptions<FinnhubOptions> options)
         {
             _httpClient = httpClient;

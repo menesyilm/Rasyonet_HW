@@ -3,6 +3,7 @@ using Rasyonet_HW.API.Data;
 using Rasyonet_HW.API.Configuration;
 using Rasyonet_HW.API.External;
 using Rasyonet_HW.API.Repositories;
+using Rasyonet_HW.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,9 @@ builder.Services.Configure<FinnhubOptions>(
 builder.Services.AddHttpClient<FinnhubService>();
 //Add repository to DI container
 builder.Services.AddScoped<IStockRepository, StockRepository>();
+//Add service to DI container
+builder.Services.AddScoped<IStockService, StockService>();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();

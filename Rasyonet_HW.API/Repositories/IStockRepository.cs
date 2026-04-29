@@ -12,5 +12,6 @@ namespace Rasyonet_HW.API.Repositories
         Task<Stock> AddAsync(Stock stock);
         Task DeleteAsync(Stock stock);
         Task<bool> ExistsAsync(string symbol);
+        Task SaveChangesAsync();
     }
 }

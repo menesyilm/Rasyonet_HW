@@ -45,5 +45,10 @@ namespace Rasyonet_HW.API.Repositories
             return await _context.Stocks
                 .AnyAsync(s => s.Symbol == symbol.ToUpper());
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }
