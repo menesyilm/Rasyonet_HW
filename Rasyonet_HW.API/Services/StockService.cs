@@ -64,7 +64,7 @@ namespace Rasyonet_HW.API.Services
                 FetchedAt = DateTime.UtcNow
             };
 
-            stock.Prices.Add(snapshot);
+            stock.PriceSnapshot.Add(snapshot);
             await _repository.SaveChangesAsync();
 
             return snapshot;
@@ -77,8 +77,8 @@ namespace Rasyonet_HW.API.Services
             // Strategy Pattern — sıralama mantığı burada izole edildi.
             // İleride farklı sıralama stratejileri eklenebilir (top losers, most volatile vs.)
             return stocks
-                .Where(s => s.Prices.Any())
-                .OrderByDescending(s => s.Prices
+                .Where(s => s.PriceSnapshot.Any())
+                .OrderByDescending(s => s.PriceSnapshot
                     .OrderByDescending(p => p.FetchedAt)
                     .First().ChangePercent)
                 .Take(count);
