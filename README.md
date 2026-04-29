@@ -14,27 +14,6 @@ A simple internal tool for tracking stock prices and monitoring watchlist perfor
 
 ---
 
-## Project Structure
-
-Rasyonet_HW/
-├── Rasyonet_HW.API/
-│   ├── Controllers/       → HTTP endpoints
-│   ├── Services/          → Business logic
-│   ├── Repositories/      → Database access
-│   ├── External/          → Finnhub API client
-│   ├── Models/            → Database entities
-│   ├── DTOs/              → Request & response shapes
-│   ├── Data/              → DbContext & migrations
-│   └── Configuration/     → Strongly-typed settings
-│
-└── Rasyonet_HW.UI/
-└── src/
-├── components/    → Header, tables, forms, popup
-├── styles/        → Global styles and color palette
-└── api.js         → Axios API calls
-
----
-
 ## Setup
 
 ### 1. Clone the repository
