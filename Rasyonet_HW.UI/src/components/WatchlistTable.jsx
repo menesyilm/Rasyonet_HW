@@ -57,7 +57,7 @@ export default function WatchlistTable({ watchlist, onRefresh, onRemove }) {
                 <td style={styles.td}>
                   {stock.latestChangePercent != null ? (
                     <span style={{
-                      color: stock.latestChangePercent >= 0 ? '#706D72' : '#000000',
+                      color: stock.latestChangePercent >= 0 ? '#22c55e' : '#ef4444',
                       fontWeight: 600,
                     }}>
                       {stock.latestChangePercent >= 0 ? '+' : ''}
