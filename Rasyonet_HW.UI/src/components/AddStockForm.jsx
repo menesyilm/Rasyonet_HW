@@ -17,7 +17,7 @@ export default function AddStockForm({ symbol, companyName, loading, onSymbolCha
           value={companyName}
           onChange={(e) => onCompanyChange(e.target.value)}
         />
-        <button style={styles.btnPrimary} onClick={onAdd} disabled={loading}>
+        <button className="btn-primary" onClick={onAdd} disabled={loading}>
           {loading ? 'Adding...' : '+ Add to Watchlist'}
         </button>
       </div>

@@ -6,19 +6,126 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #0a0f1e;
-  color: #e2e8f0;
+  background-color: #DFD9E4;
+  color: #000000;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
+.btn-primary {
+  background: #000000;
+  color: #DFD9E4;
+  border: 1px solid #DFD9E4;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-::-webkit-scrollbar-track {
-  background: #0a0f1e;
+.btn-primary:hover {
+  background: #DFD9E4;
+  color: #000000;
+  border-color: #DFD9E4;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #1e3a5f;
-  border-radius: 3px;
+.btn-refresh {
+  background: #DFD9E4;
+  color: #000000;
+  border: 1px solid #C4BEC8;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: all 0.2s ease;
 }
+
+.btn-refresh:hover {
+  background: #000000;
+  color: #DFD9E4;
+  border-color: #000000;
+}
+
+.btn-delete {
+  background: #000000;
+  color: #DFD9E4;
+  border: 1px solid #DFD9E4;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+  background: #DFD9E4;
+  color: #000000;
+  border-color: #000000;
+}
+
+.btn-cancel {
+  background: #DFD9E4;
+  color: #000000;
+  border: 1px solid #C4BEC8;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+  background: #000000;
+  color: #DFD9E4;
+  border-color: #000000;
+}
+
+.btn-confirm {
+  background: #000000;
+  color: #DFD9E4;
+  border: 1px solid #DFD9E4;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-confirm:hover {
+  background: #DFD9E4;
+  color: #000000;
+  border-color: #000000;
+}
+
+.btn-tab {
+  background: transparent;
+  border: 1px solid #C4BEC8;
+  border-radius: 8px;
+  padding: 8px 20px;
+  color: #706D72;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-tab:hover {
+  background: #DFD9E4;
+  color: #000000;
+  border-color: #000000;
+}
+
+.btn-tab-active {
+  background: #000000;
+  color: #DFD9E4;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #DFD9E4; }
+::-webkit-scrollbar-thumb { background: #A8A3AB; border-radius: 3px; }

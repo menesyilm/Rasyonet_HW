@@ -59,18 +59,16 @@ export default function App() {
     }
   };
 
-  const handleRemove = async (sym) => {
-    const confirmed = window.confirm(`Are you sure you want to remove ${sym} from watchlist?`);
-    if (!confirmed) return;
-    try {
-      await removeStock(sym);
-      showMessage(`${sym} removed.`);
-      fetchWatchlist();
-      fetchTopGainers();
-    } catch {
-      showMessage('Failed to remove.', 'error');
-    }
-  };
+const handleRemove = async (sym) => {
+  try {
+    await removeStock(sym);
+    showMessage(`${sym} removed.`);
+    fetchWatchlist();
+    fetchTopGainers();
+  } catch {
+    showMessage('Failed to remove.', 'error');
+  }
+};
 
   const handleRefresh = async (sym) => {
     try {
@@ -90,8 +88,9 @@ export default function App() {
       {message && (
         <div style={{
           ...styles.message,
-          background: message.type === 'error' ? '#3b1a1a' : '#1a3b2a',
-          borderColor: message.type === 'error' ? '#ef4444' : '#22c55e',
+          background: message.type === 'error' ? '#000000' : '#000000',
+          borderColor: message.type === 'error' ? '#706D72' : '#706D72',
+          color: '#DFD9E4',
         }}>
           {message.text}
         </div>
@@ -106,20 +105,18 @@ export default function App() {
         onAdd={handleAdd}
       />
 
-      <div style={styles.tabs}>
-        <button
-          style={{ ...styles.tab, ...(activeTab === 'watchlist' ? styles.tabActive : {}) }}
-          onClick={() => setActiveTab('watchlist')}
-        >
-          Watchlist ({watchlist.length})
-        </button>
-        <button
-          style={{ ...styles.tab, ...(activeTab === 'gainers' ? styles.tabActive : {}) }}
-          onClick={() => setActiveTab('gainers')}
-        >
-          Top Gainers
-        </button>
-      </div>
+      <button
+        className={activeTab === 'watchlist' ? 'btn-tab-active' : 'btn-tab'}
+        onClick={() => setActiveTab('watchlist')}
+      >
+        Watchlist ({watchlist.length})
+      </button>
+      <button
+        className={activeTab === 'gainers' ? 'btn-tab-active' : 'btn-tab'}
+        onClick={() => setActiveTab('gainers')}
+      >
+        Top Gainers
+      </button>
 
       {activeTab === 'watchlist' && (
         <WatchlistTable
