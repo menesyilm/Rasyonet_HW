@@ -61,6 +61,9 @@ export default function App() {
   };
 
   const handleRemove = async (sym) => {
+    const confirmed = window.confirm(`Are you sure you want to remove ${sym} from watchlist?`);
+    if (!confirmed) return;
+
     try {
       await removeStock(sym);
       showMessage(`${sym} removed.`);
