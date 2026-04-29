@@ -1,14 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using Rasyonet_HW.API.Data;
+using Rasyonet_HW.API.Configuration;
+using Rasyonet_HW.API.External;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-
+//AddDbContext configuration
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+//Add Finnhub configuration and service
+builder.Services.Configure<FinnhubOptions>(
+    builder.Configuration.GetSection("Finnhub"));
+builder.Services.AddHttpClient<FinnhubService>();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
