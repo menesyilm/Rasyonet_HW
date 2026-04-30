@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { getWatchlist, addStock, removeStock, refreshPrice, getTopGainers } from './api';
+import { getWatchlist, addStock, removeStock, refreshPrice, getTopGainers, getTopLosers } from './api';
 import { styles } from './styles/styles';
 import Header from './components/Header';
 import AddStockForm from './components/AddStockForm';
 import WatchlistTable from './components/WatchlistTable';
 import TopGainersTable from './components/TopGainersTable';
+import TopLosersTable from './components/TopLosersTable';
 
 export default function App() {
   const [watchlist, setWatchlist] = useState([]);
   const [topGainers, setTopGainers] = useState([]);
+  const [topLosers, setTopLosers] = useState([]);
   const [symbol, setSymbol] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [loading, setLoading] = useState(false);
@@ -18,6 +20,7 @@ export default function App() {
   useEffect(() => {
     fetchWatchlist();
     fetchTopGainers();
+    fetchTopLosers();
   }, []);
 
   const fetchWatchlist = async () => {
@@ -35,6 +38,14 @@ export default function App() {
       setTopGainers(res.data);
     } catch {
       showMessage('Failed to fetch top gainers.', 'error');
+    }
+  };
+   const fetchTopLosers = async () => {
+    try {
+      const res = await getTopLosers();
+      setTopLosers(res.data);
+    } catch {
+      showMessage('Failed to fetch top losers.', 'error');
     }
   };
 
@@ -65,6 +76,7 @@ const handleRemove = async (sym) => {
     showMessage(`${sym} removed.`);
     fetchWatchlist();
     fetchTopGainers();
+    fetchTopLosers();
   } catch {
     showMessage('Failed to remove.', 'error');
   }
@@ -76,6 +88,7 @@ const handleRemove = async (sym) => {
       showMessage(`${sym} price refreshed.`);
       fetchWatchlist();
       fetchTopGainers();
+      fetchTopLosers();
     } catch {
       showMessage('Failed to refresh price.', 'error');
     }
@@ -117,6 +130,12 @@ const handleRemove = async (sym) => {
       >
         Top Gainers
       </button>
+      <button
+        className={activeTab === 'losers' ? 'btn-tab-active' : 'btn-tab'}
+        onClick={() => setActiveTab('losers')}
+      >
+        Top Losers
+      </button>
 
       {activeTab === 'watchlist' && (
         <WatchlistTable
@@ -128,6 +147,9 @@ const handleRemove = async (sym) => {
 
       {activeTab === 'gainers' && (
         <TopGainersTable topGainers={topGainers} />
+      )}
+      {activeTab === 'losers' && (
+        <TopLosersTable topLosers={topLosers} />
       )}
     </div>
   );

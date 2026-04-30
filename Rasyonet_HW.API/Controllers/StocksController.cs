@@ -109,5 +109,27 @@ namespace Rasyonet_HW.API.Controllers
 
             return Ok(response);
         }
+        [HttpGet("analytics/top-losers")]
+        public async Task<IActionResult> GetTopLosers([FromQuery] int count = 5)
+        {
+            if (count <= 0)
+                return BadRequest("Count must be greater than 0.");
+
+            var stocks = await _stockService.GetTopLosersAsync(count);
+
+            var response = stocks.Select(s => new StockResponse
+            {
+                Id = s.Id,
+                Symbol = s.Symbol,
+                CompanyName = s.CompanyName,
+                AddedAt = s.AddedAt,
+                LatestPrice = s.PriceSnapshot.OrderByDescending(p => p.FetchedAt)
+                                      .FirstOrDefault()?.CurrentPrice,
+                LatestChangePercent = s.PriceSnapshot.OrderByDescending(p => p.FetchedAt)
+                                              .FirstOrDefault()?.ChangePercent
+            });
+
+            return Ok(response);
+        }
     }
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://localhost:7083/api',
+  baseURL: 'http://localhost:5154/api',
 });
 
 export const getWatchlist = () => api.get('/stocks');
@@ -11,3 +11,5 @@ export const removeStock = (symbol) => api.delete(`/stocks/${symbol}`);
 export const refreshPrice = (symbol) => api.post(`/stocks/${symbol}/refresh`);
 export const getTopGainers = (count = 5) =>
   api.get(`/stocks/analytics/top-gainers?count=${count}`);
+export const getTopLosers = (count = 5) =>
+  api.get(`/stocks/analytics/top-losers?count=${count}`);

@@ -9,5 +9,6 @@ namespace Rasyonet_HW.API.Services
         Task<bool> RemoveFromWatchlistAsync(string symbol);
         Task<PriceSnapshot?> RefreshPriceAsync(string symbol);
         Task<IEnumerable<Stock>> GetTopGainersAsync(int count);
+        Task <IEnumerable<Stock>> GetTopLosersAsync(int count);
     }
 }

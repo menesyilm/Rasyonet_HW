@@ -75,10 +75,19 @@ namespace Rasyonet_HW.API.Services
             var stocks = await _repository.GetAllAsync();
 
             // Strategy Pattern — sıralama mantığı burada izole edildi.
-            // İleride farklı sıralama stratejileri eklenebilir (top losers, most volatile vs.)
             return stocks
                 .Where(s => s.PriceSnapshot.Any())
                 .OrderByDescending(s => s.PriceSnapshot
+                    .OrderByDescending(p => p.FetchedAt)
+                    .First().ChangePercent)
+                .Take(count);
+        }
+        public async Task<IEnumerable<Stock>> GetTopLosersAsync(int count)
+        {
+            var stocks = await _repository.GetAllAsync();
+            return stocks
+                .Where(s => s.PriceSnapshot.Any())
+                .OrderBy(s => s.PriceSnapshot
                     .OrderByDescending(p => p.FetchedAt)
                     .First().ChangePercent)
                 .Take(count);

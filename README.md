@@ -66,4 +66,5 @@ Frontend → `http://localhost:5173`
 | POST | `/api/stocks/watch` | Add stock |
 | DELETE | `/api/stocks/{symbol}` | Remove stock |
 | POST | `/api/stocks/{symbol}/refresh` | Fetch latest price |
-| GET | `/api/stocks/analytics/top-gainers` | Top N gainers |
+| GET | `/api/stocks/analytics/top-gainers` | Top 5 gainers |
+| GET | `/api/stocks/analytics/top-losers` | Top 5 losers |
