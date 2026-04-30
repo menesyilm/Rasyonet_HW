@@ -134,3 +134,7 @@ dotnet test
 - Price data is fetched on-demand (manual refresh) rather than on a schedule. A background service (`IHostedService`) could automate this in a production scenario.
 - No authentication is implemented — intentional for a simple internal tool scope.
 - Unit tests cover the service layer. The repository pattern makes it straightforward to mock dependencies and test business logic in isolation.
+
+## Color Palette
+<img width="1907" height="593" alt="image" src="https://github.com/user-attachments/assets/006bb6fa-cde1-4e08-ac12-bd27a24c3c0c" />
+
