@@ -24,13 +24,13 @@ namespace Rasyonet_HW.API.Services
         {
             if (await _repository.ExistsAsync(symbol))
                 return null;
-
-            var stock = new Stock
-            {
-                Symbol = symbol.ToUpper(),
-                CompanyName = companyName,
-                AddedAt = DateTime.UtcNow
-            };
+            // Builder Pattern — Stock nesnesinin oluşturulması StockBuilder üzerinden yapılır.
+            // Nesne inşa sürecini izole eder, ileride validasyon veya default değer
+            // atamaları tek bir yerde yönetilebilir hale gelir.
+            var stock = new StockBuilder()
+                .WithSymbol(symbol)
+                .WithCompanyName(companyName)
+                .Build();
 
             return await _repository.AddAsync(stock);
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rasyonet_HW.API.DTOs;
 using Rasyonet_HW.API.Services;
+using Rasyonet_HW.API.Models;
 
 namespace Rasyonet_HW.API.Controllers
 {
@@ -9,29 +10,27 @@ namespace Rasyonet_HW.API.Controllers
     public class StocksController : ControllerBase
     {
         private readonly IStockService _stockService;
-
         public StocksController(IStockService stockService)
         {
             _stockService = stockService;
         }
+        private StockResponse MapToResponse(Stock s) => new StockResponse
+        {
+            Id = s.Id,
+            Symbol = s.Symbol,
+            CompanyName = s.CompanyName,
+            AddedAt = s.AddedAt,
+            LatestPrice = s.PriceSnapshot.OrderByDescending(p => p.FetchedAt)
+                                         .FirstOrDefault()?.CurrentPrice,
+            LatestChangePercent = s.PriceSnapshot.OrderByDescending(p => p.FetchedAt)
+                                                 .FirstOrDefault()?.ChangePercent
+        };
 
         [HttpGet]
         public async Task<IActionResult> GetWatchlist()
         {
             var stocks = await _stockService.GetWatchlistAsync();
-
-            var response = stocks.Select(s => new StockResponse
-            {
-                Id = s.Id,
-                Symbol = s.Symbol,
-                CompanyName = s.CompanyName,
-                AddedAt = s.AddedAt,
-                LatestPrice = s.PriceSnapshot.OrderByDescending(p => p.FetchedAt)
-                                      .FirstOrDefault()?.CurrentPrice,
-                LatestChangePercent = s.PriceSnapshot.OrderByDescending(p => p.FetchedAt)
-                                              .FirstOrDefault()?.ChangePercent
-            });
-
+            var response = stocks.Select(MapToResponse);
             return Ok(response);
         }
 
@@ -94,18 +93,7 @@ namespace Rasyonet_HW.API.Controllers
                 return BadRequest("Count must be greater than 0.");
 
             var stocks = await _stockService.GetTopGainersAsync(count);
-
-            var response = stocks.Select(s => new StockResponse
-            {
-                Id = s.Id,
-                Symbol = s.Symbol,
-                CompanyName = s.CompanyName,
-                AddedAt = s.AddedAt,
-                LatestPrice = s.PriceSnapshot.OrderByDescending(p => p.FetchedAt)
-                                      .FirstOrDefault()?.CurrentPrice,
-                LatestChangePercent = s.PriceSnapshot.OrderByDescending(p => p.FetchedAt)
-                                              .FirstOrDefault()?.ChangePercent
-            });
+            var response = stocks.Select(MapToResponse);
 
             return Ok(response);
         }
@@ -116,19 +104,8 @@ namespace Rasyonet_HW.API.Controllers
                 return BadRequest("Count must be greater than 0.");
 
             var stocks = await _stockService.GetTopLosersAsync(count);
-
-            var response = stocks.Select(s => new StockResponse
-            {
-                Id = s.Id,
-                Symbol = s.Symbol,
-                CompanyName = s.CompanyName,
-                AddedAt = s.AddedAt,
-                LatestPrice = s.PriceSnapshot.OrderByDescending(p => p.FetchedAt)
-                                      .FirstOrDefault()?.CurrentPrice,
-                LatestChangePercent = s.PriceSnapshot.OrderByDescending(p => p.FetchedAt)
-                                              .FirstOrDefault()?.ChangePercent
-            });
-
+            var response = stocks.Select(MapToResponse);
+            
             return Ok(response);
         }
     }
